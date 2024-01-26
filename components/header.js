@@ -5,7 +5,7 @@ import styles from 'styles/header.module.css'
 const Header = () => {
   return (
     <header>
-      <Container>
+      <Container large>
         <div className={styles.flexContainer}>
           <Logo boxOn />
           <Nav />
