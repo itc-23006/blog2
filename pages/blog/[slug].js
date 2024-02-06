@@ -17,7 +17,7 @@ import { getPlaiceholder } from 'plaiceholder'
 // ローカルの代賛アイキャッチ画像
 import { eyecatchLocal } from 'lib/constants'
 
-const Schedule = ({
+const Post = ({
   title,
   publish,
   content,
@@ -65,9 +65,15 @@ const Schedule = ({
     </Container>
   )
 }
+const getStaticPaths = async () => {
+  return {
+    paths: ['/blog/schedule', '/blog/music', '/blog/micro'],
+    fallback: false
+  }
+}
 
-const getStaticProps = async () => {
-  const slug = 'micro'
+const getStaticProps = async context => {
+  const slug = context.params.slug
   const post = await getPostBySlug(slug)
   const description = extractText(post.content)
   const eyecatch = post.eyecatch ?? eyecatchLocal
@@ -86,5 +92,5 @@ const getStaticProps = async () => {
   }
 }
 
-export { getStaticProps }
-export default Schedule
+export { getStaticPaths, getStaticProps }
+export default Post
